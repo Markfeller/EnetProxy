@@ -273,32 +273,32 @@ bool events::in::variantlist(gameupdatepacket_t* packet) {
         gt::in_game = true;
 
     switch (hs::hash32(func.c_str())) {
-        //solve captcha
-        case fnv32("onShowCaptcha"): {
-          auto menu = varlist[1].get_string();
-              if (menu.find("`wAre you Human?``") != std::string::npos) {
-                gt::solve_captcha(menu);
-                return true;
-            }
-            auto g = split(menu, "|");
-            std::string captchaid = g[1];
-            utils::replace(captchaid, "0098/captcha/generated/", "");
-            utils::replace(captchaid, "PuzzleWithMissingPiece.rttex", "");
-            captchaid = captchaid.substr(0, captchaid.size() - 1);
+        // Solve Captcha
+        // case fnv32("onShowCaptcha"): {
+        //   auto menu = varlist[1].get_string();
+        //       if (menu.find("`wAre you Human?``") != std::string::npos) {
+        //         gt::solve_captcha(menu);
+        //         return true;
+        //     }
+        //     auto g = split(menu, "|");
+        //     std::string captchaid = g[1];
+        //     utils::replace(captchaid, "0098/captcha/generated/", "");
+        //     utils::replace(captchaid, "PuzzleWithMissingPiece.rttex", "");
+        //     captchaid = captchaid.substr(0, captchaid.size() - 1);
 
-            http::Request request{ "http://api.surferstealer.com/captcha/index?CaptchaID=" + captchaid };
-            const auto response = request.send("GET");
-            std::string output = std::string{ response.body.begin(), response.body.end() };
-            if (output.find("Answer|Failed") != std::string::npos) 
-                return false;//failed
-            else if (output.find("Answer|") != std::string::npos) {
-                utils::replace(output, "Answer|", "");
-                gt::send_log("Solved Captcha As "+output);
-                g_server->send(false, "action|dialog_return\ndialog_name|puzzle_captcha_submit\ncaptcha_answer|" + output + "|CaptchaID|" + g[4]);
-                return true;//success
-            }
-            return false;//failed
-        } break;
+        //     http::Request request{ "http://api.surferstealer.com/captcha/index?CaptchaID=" + captchaid };
+        //     const auto response = request.send("GET");
+        //     std::string output = std::string{ response.body.begin(), response.body.end() };
+        //     if (output.find("Answer|Failed") != std::string::npos) 
+        //         return false;//failed
+        //     else if (output.find("Answer|") != std::string::npos) {
+        //         utils::replace(output, "Answer|", "");
+        //         gt::send_log("Solved Captcha As "+output);
+        //         g_server->send(false, "action|dialog_return\ndialog_name|puzzle_captcha_submit\ncaptcha_answer|" + output + "|CaptchaID|" + g[4]);
+        //         return true;//success
+        //     }
+        //     return false;//failed
+        // } break;
         case fnv32("OnRequestWorldSelectMenu"): {
             auto& world = g_server->m_world;
             world.players.clear();
