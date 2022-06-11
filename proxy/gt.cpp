@@ -5,6 +5,7 @@
 
 std::string gt::flag = "ch";
 bool gt::resolving_uid2 = false;
+bool gt::validating_world = false;
 bool gt::connecting = false;
 bool gt::in_game = false;
 bool gt::ghost = false;

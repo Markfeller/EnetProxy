@@ -4,6 +4,7 @@
 namespace gt {
     extern std::string flag;
     extern bool resolving_uid2;
+    extern bool validating_world;
     extern bool connecting;
     extern bool in_game;
     extern bool ghost;

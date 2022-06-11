@@ -171,9 +171,24 @@ bool events::out::generictext(std::string packet) {
         } else if (find_command(chat, "warp ")) {
             std::string name = chat.substr(6);
             gt::send_log("`7Warping to " + name);
-            g_server->send(false, "action|join_request\nname|" + name, 3);
+            g_server->send(false, "action|join_request\nname|" + name + "\ninvitedWorld|0", 3);
             return true;
-           } else if (find_command(chat, "pullall")) {
+        } else if (find_command(chat, "val ")) { // search 5 letter world
+            // "/val name" will vaildate world "namea", "nameb", "namec", ...
+            std::string name = chat.substr(5);
+            g_server->send(false, "action|validate_world\nname|" + name, 3);
+            std::string alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
+            gt::validating_world = true;
+            for (int i = 0; i < alphabet.length(); i++)
+            {
+                std::this_thread::sleep_for(std::chrono::milliseconds(5)); // idk, might not need this
+                g_server->send(false, "action|validate_world\nname|" + name + alphabet[i], 3);
+            }
+            return true;
+        } else if (find_command(chat, "unval")) { // to stop receiving validating world when entering world or stuff.
+            gt::validating_world = false;
+            return true;
+        } else if (find_command(chat, "pullall")) {
             std::string username = chat.substr(6);
             for (auto& player : g_server->m_world.players) {
                 auto name_2 = player.name.substr(2); //remove color
@@ -447,6 +462,21 @@ bool events::in::gamemessage(std::string packet) {
         } else if (packet.find("Clever perhaps") != -1) {
             gt::resolving_uid2 = false;
             gt::send_log("Target is a moderator, can't ignore them.");
+        }
+    }
+    
+
+    if (gt::validating_world) {
+        if (packet.find("world_validated") != -1) {
+            std::string worldname = packet.substr(packet.find("world_name|") + 11, packet.length() - packet.find("world_name|"));
+            if (packet.find("available|1\n") != -1)
+            {
+                gt::send_log(worldname + " is Available");
+            }
+            else if (packet.find("available|0\n") != -1)
+            { 
+                gt::send_log(worldname + " is `4NOT Available");
+            }
         }
     }
     return false;
