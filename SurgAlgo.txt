@@ -1,0 +1,19 @@
+if defib is present, use defib
+if no other tools, use sponge (could cause spamming sponge)
+if fever is rising (chicken feet stuff), 
+    if anti exist, use anti,
+    else use lab kit
+if losing blood and incision = 0, use stit
+if status coming to, use anes
+if pulse extremely weak, use transfusion
+if incisions > 0 and losing blood, use clamp
+if shattered present and incision not 0, use pins
+if broken present, use splint
+if fix it present, use fix it
+if temp is not green, use anti (should be last)
+if ultra not present, use anes
+if ultra not present and status not awake, use scalpel
+use ultra
+use stit
+
+test surg, https://www.growtopiasurgery.xyz/p/surgery-simulator-growtopia-surgery.html
