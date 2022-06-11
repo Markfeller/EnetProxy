@@ -126,11 +126,11 @@ void server::handle_incoming() {
                         auto extended_ptr = utils::get_extended(packet);
                         inventory.resize(*reinterpret_cast<short*>(extended_ptr + 9));
                         memcpy(inventory.data(), extended_ptr + 11, server::inventory.capacity() * sizeof(Item));
-                        //for (Item& item : inventory) {
-                        //    std::cout << "Id: "<< (int)item.id << std::endl;
-                        //    std::cout << "Count: "<< (int)item.count << std::endl;
-                        //    std::cout << "type: "<< (int)item.type << std::endl;
-                        //}
+                        for (Item& item : inventory) {
+                           std::cout << "Id: "<< (int)item.id << std::endl;
+                           std::cout << "Count: "<< (int)item.count << std::endl;
+                           std::cout << "type: "<< (int)item.type << std::endl;
+                        }
                     }break;                                    
                     case 8: {
                         if (!packet->m_int_data) {
