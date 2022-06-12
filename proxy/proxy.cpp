@@ -31,7 +31,8 @@ BOOL WINAPI exit_handler(DWORD dwCtrlType) {
     }
     catch(int e) {}
 }
- #endif
+#endif
+
 void setgtserver() {
 #ifdef _WIN32
     try {
@@ -42,7 +43,7 @@ void setgtserver() {
             unwrite.close();
         }
     } catch (std::exception) {}
- #endif
+#endif
     try
     {
         http::Request request{ "http://a104-125-3-135.deploy.static.akamaitechnologies.com/growtopia/server_data.php" };
@@ -52,35 +53,35 @@ void setgtserver() {
 #ifdef _WIN32
         var.serialize();
         if (var.find("server")) {
-            g_server->m_port = std::stoi(var.get("port"));
+            g_server->m_port = var.get_int("port");
             g_server->meta = var.get("meta");
         }
- #endif
+#endif
 #ifdef __linux__ 
         //rtvar crashing on linux idk why
-std::istringstream f({ response.body.begin(), response.body.end() });
-	std::string line;
-	while (std::getline(f, line)) {
-		if (line.find("server|2") != -1)
-		{
-			utils::replace(line, "server|", "");
-			g_server->m_server=line;
-			continue;
-		}
-		if (line.find("port|1") != -1)
-		{
-			utils::replace(line, "port|", "");
-			g_server->m_port=(stoi(line));
-			break;
-		}
-        if (line.find("meta|") != -1)
-		{
-			utils::replace(line, "meta|", "");
-			g_server->meta=line;
-			break;
-		}
-	}
- #endif
+        std::istringstream f({ response.body.begin(), response.body.end() });
+        std::string line;
+        while (std::getline(f, line)) {
+            if (line.find("server|2") != -1)
+            {
+                utils::replace(line, "server|", "");
+                g_server->m_server=line;
+                continue;
+            }
+            if (line.find("port|1") != -1)
+            {
+                utils::replace(line, "port|", "");
+                g_server->m_port=(stoi(line));
+                break;
+            }
+            if (line.find("meta|") != -1)
+            {
+                utils::replace(line, "meta|", "");
+                g_server->meta=line;
+                break;
+            }
+        }
+#endif
 #ifdef _WIN32
         try {
             std::ofstream sethost("C:\\Windows\\System32\\drivers\\etc\\hosts");
