@@ -371,7 +371,7 @@ bool events::in::variantlist(gameupdatepacket_t* packet) {
                     // maybe use switch statement is better but idc
                     if (content.find("tool4312") != -1) { // defibrilator
                         // use defibrilator
-                        //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4312");
+                        g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4312");
                         PRINTC("DEFIBRILATOR");
                         gt::send_log("DEFIBRILATOR");
                     }
@@ -390,26 +390,26 @@ bool events::in::variantlist(gameupdatepacket_t* packet) {
                         )
                     { // inefficient but idc
                         // use sponge
-                        //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1258");
+                        g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1258");
                         PRINTC("SPONGE");
                         gt::send_log("SPONGE");
                     }
                     else if (content.find("Patient is `6losing blood") != -1 || content.find("Patient is losing blood") != -1) {
                         if (content.find("Fix It!") != -1) {
                             // use stit
-                            //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1270");
+                            g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1270");
                             PRINTC("STITCH");
                             gt::send_log("STITCH");
                         }
                         else if (content.find("tool4314") != -1) { // clamp
                             // use clamp
-                            //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4314");
+                            g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4314");
                             PRINTC("CLAMP");
                             gt::send_log("CLAMP");
                         }
                         else {
                             // use stit
-                            //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1270");
+                            g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1270");
                             PRINTC("STITCH");
                             gt::send_log("STITCH");
                         }
@@ -417,98 +417,96 @@ bool events::in::variantlist(gameupdatepacket_t* packet) {
                     else if (content.find("Patient's fever is ") != -1) {
                         if (content.find("tool4318") != -1) {
                             // use lab kit
-                            //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4318");
+                            g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4318");
                             PRINTC("LAB KIT");
                             gt::send_log("LAB KIT");
                         }
                         else {
                             // use antibio
-                            //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1266");
+                            g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1266");
                             PRINTC("ANTIBIOTICS");
                             gt::send_log("ANTIBIOTICS");
                         }
                     }
                     else if (content.find("Status: `6Coming to``|left|") != -1) {
                         // use anes
-                        //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1262");
+                        g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1262");
                         PRINTC("ANESTHETIC");
                         gt::send_log("ANESTHETIC");
                     }
                     else if (content.find("add_smalltext|Pulse: `4Extremely Weak``") != -1) {
                         // use transfusion
-                        //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4310");
+                        g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4310");
                         PRINTC("TRANSFUSION");
                         gt::send_log("TRANSFUSION");
                     }
                     else if (content.find(" shattered``") != -1 && content.substr(content.find("Incisions: `") + 13, 1) != "0") {
                         // use pins
-                        //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4308");
+                        g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4308");
                         PRINTC("PINS");
                         gt::send_log("PINS");
                     }
                     else if (content.find(" broken``") != -1) {
                         // use splint
-                        //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1268");
+                        g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1268");
                         PRINTC("SPLINT");
                         gt::send_log("SPLINT");
                     }
                     else if (content.find("Fix It!") != -1) {
-                        // use fix it
                         if (content.substr(content.find("Incisions: `") + 13, 1) != "0") {
-                            //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1270");
+                            // use stit
+                            g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1270");
                             PRINTC("STITCH");
                             gt::send_log("STITCH");
                         }
                         else {
-                            //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1296"); // might be wrong
+                            // use fix it
+                            g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1296"); // might be wrong
                             PRINTC("FIX IT!");
                             gt::send_log("FIX IT!");
                         }
                     }
                     else if (content.find("Temp: `6") != -1 || content.find("Temp: `4") != -1) {
-                        // use antibiotic
                         if (content.find("tool4318") != -1) {
                             // use lab kit
-                            //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4318");
+                            g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4318");
                             PRINTC("LAB KIT");
                             gt::send_log("LAB KIT");
                         }
                         else {
                             // use antibio
-                            //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1266");
+                            g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1266");
                             PRINTC("ANTIBIOTIC");
                             gt::send_log("ANTIBIOTIC");
                         }
-                        //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1266");
-                        //g_server->send(false, "action|input\n|text|antibio");
                     }
                     else if (content.find("tool4316") == std::string::npos) { // ultrasound not found
                         if (content.find("Status: `4Awake``|") == std::string::npos && content.find("Status: `3Awake``|") == std::string::npos) {
                             // use scalpel
-                            //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1260");
+                            g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1260");
                             PRINTC("SCALPEL");
                             gt::send_log("SCALPEL");
                         }
                         else {
                             // use anes
-                            //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1262");
+                            g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1262");
                             PRINTC("ANESTHETIC");
                             gt::send_log("ANESTHETIC");
                         }
                     }
                     else if (content.find("tool4316") != -1) { // ultrasound found
                         // use ultrasound
-                        //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4316");
+                        g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool4316");
                         PRINTC("ULTRASOUND");
                         gt::send_log("ULTRASOUND");
                     }
                     else if (content.find("Temp: `2") != -1) {
                         // use antibio
-                        //g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1266");
+                        g_server->send(false, "action|dialog_return\ndialog_name|surgery\nbuttonClicked|tool1266");
                         PRINTC("ANTIBIOTIC");
                         gt::send_log("ANTIBIOTIC");
                     }
-                    return false; // true to block dialog (?)
+                    return true;
                 }
             }
             if (wrench) {
